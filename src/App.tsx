@@ -4,6 +4,9 @@ import {Button} from "@headlessui/react";
 import {FFmpeg} from "@ffmpeg/ffmpeg";
 import {fetchFile, toBlobURL} from "@ffmpeg/util";
 import {saveAs} from 'file-saver';
+import NavBar from "./components/Nav";
+import FileDropZone from "./components/FileDropZone";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const ffmpegRef = useRef(new FFmpeg());
@@ -52,21 +55,23 @@ function App() {
     setGif(url)
   }
 
+  const loader = <div
+    className="fixed left-[50%] top-[50%] inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite]"
+    role="status">
+      <span
+        className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+        Loading...
+      </span>
+  </div>;
   return (
-    <div className="App h-[100%] max-w-[960px] mx-auto flex justify-center items-center flex-col gap-3">
+    <div className="font-mono p-5 dark:bg-gray-900 dark:text-white h-[100%]">
+      <NavBar/>
       {
         !loaded ?
-          <div
-            className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] text-black"
-            role="status">
-              <span
-                className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
-                Loading...
-              </span>
-          </div> :
+          loader :
           <>
             {
-              !video && <input type="file" accept=".mp4" onChange={(e) => setVideo(e.target.files?.[0])}/>
+              !video && <FileDropZone setVideo={setVideo} />
             }
             {
               video && !gif &&
@@ -81,7 +86,7 @@ function App() {
             }
             {!gif && <p ref={messageRef}></p>}
             {gif && <>
-                <img src={gif} width="100%"/>
+                <img src={gif} width="100%" alt="gif image"/>
                 <Button
                     onClick={downloadGIF}
                     className="mr-auto inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white">

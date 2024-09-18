@@ -1,0 +1,10 @@
+.header {
+    display: grid;
+    align-items: center;
+    justify-content: space-between;
+    grid-template-columns: minmax(200px, auto) auto minmax(200px, auto);
+}
+
+.header > :last-child {
+    text-align: end;
+}
