@@ -1,10 +1,10 @@
-import "./App.css";
-import { Button } from "@headlessui/react";
-import NavBar from "./components/Nav";
-import FileDropZone from "./components/FileDropZone";
-import { ToastContainer } from "react-toastify";
-import { useFFmpeg } from "./hooks/useFfmpeg";
-import "react-toastify/dist/ReactToastify.css";
+import './App.css';
+import { Button } from '@headlessui/react';
+import NavBar from './components/Nav';
+import FileDropZone from './components/FileDropZone';
+import { ToastContainer } from 'react-toastify';
+import { useFFmpeg } from './hooks/useFfmpeg';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [error, loaded, ffmpegService] = useFFmpeg();

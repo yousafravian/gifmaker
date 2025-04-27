@@ -1,7 +1,7 @@
-import styles from "./Nav.module.css";
-import { Menu } from "lucide-react";
-import { Button } from "@headlessui/react";
-import ThemedSwitch from "../components/ThemedSwitch";
+import styles from './Nav.module.css';
+import { Menu } from 'lucide-react';
+import { Button } from '@headlessui/react';
+import ThemedSwitch from '../components/ThemedSwitch';
 function NavBar() {
   return (
     <>

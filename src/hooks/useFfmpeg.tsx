@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { FFmpegService } from "../services/ffmpeg.service";
+import { useEffect, useState } from 'react';
+import { FFmpegService } from '../services/ffmpeg.service';
 
 export function useFFmpeg() {
   const ffmpegService = new FFmpegService();
@@ -12,7 +12,7 @@ export function useFFmpeg() {
       .then(() => {
         setLoaded(true);
       })
-      .catch((e) => {
+      .catch(e => {
         setError(e);
         setLoaded(false);
       });

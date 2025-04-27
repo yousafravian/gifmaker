@@ -1,54 +1,50 @@
-import React, { useCallback, useState } from "react";
-import { DropEvent, FileRejection, useDropzone } from "react-dropzone";
-import { toast, ToastContainer } from "react-toastify";
-import { FolderClosed } from "lucide-react";
-import FilesList from "./FilesList";
+import React, { useCallback, useState } from 'react';
+import { DropEvent, FileRejection, useDropzone } from 'react-dropzone';
+import { toast, ToastContainer } from 'react-toastify';
+import { FolderClosed } from 'lucide-react';
+import FilesList from './FilesList';
 
 function FileDropZone() {
   const [files, setFiles] = useState<File[]>([]);
 
   const onDrop = useCallback(
-    (
-      acceptedFiles: File[],
-      fileRejections: FileRejection[],
-      event: DropEvent,
-    ) => {
+    (acceptedFiles: File[], fileRejections: FileRejection[], event: DropEvent) => {
       if (acceptedFiles.length) {
         setFiles([...acceptedFiles]);
       }
       if (fileRejections.length) {
         for (let fileRejection of fileRejections) {
           toast(`${fileRejection.file.name} is of invalid file type`, {
-            type: "error",
+            type: 'error',
           });
         }
       }
     },
-    [],
+    []
   );
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
-      "image/*": [
-        ".jpg",
-        ".jpeg",
-        ".png",
-        ".gif",
-        ".bmp",
-        ".webp",
-        ".ico",
-        ".tif",
-        ".tiff",
-        ".raw",
-        ".tga",
+      'image/*': [
+        '.jpg',
+        '.jpeg',
+        '.png',
+        '.gif',
+        '.bmp',
+        '.webp',
+        '.ico',
+        '.tif',
+        '.tiff',
+        '.raw',
+        '.tga',
       ],
-      "audio/*": [],
-      "video/*": [],
+      'audio/*': [],
+      'video/*': [],
     },
   });
 
   const onDiscardFile = (index: number) => {
-    setFiles((prev) => {
+    setFiles(prev => {
       prev.splice(index, 1);
       return [...prev];
     });
@@ -74,13 +70,7 @@ function FileDropZone() {
   );
 
   return (
-    <>
-      {files.length ? (
-        <FilesList onDiscardFile={onDiscardFile} files={files} />
-      ) : (
-        dropMode()
-      )}
-    </>
+    <>{files.length ? <FilesList onDiscardFile={onDiscardFile} files={files} /> : dropMode()}</>
   );
 }
 

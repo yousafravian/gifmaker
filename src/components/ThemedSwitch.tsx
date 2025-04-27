@@ -1,10 +1,10 @@
-import { Switch } from "@headlessui/react";
-import { useEffect, useState } from "react";
-import { Moon, Sun } from "lucide-react";
+import { Switch } from '@headlessui/react';
+import { useEffect, useState } from 'react';
+import { Moon, Sun } from 'lucide-react';
 
 export default function ThemedSwitch() {
   function getDarkModeEnabled() {
-    return JSON.parse(localStorage.getItem("DARKMODE") ?? "false");
+    return JSON.parse(localStorage.getItem('DARKMODE') ?? 'false');
   }
 
   const isDarkModeEnabled = getDarkModeEnabled();
@@ -12,11 +12,11 @@ export default function ThemedSwitch() {
 
   useEffect(() => {
     if (enabled) {
-      document.body.classList.add("dark");
-      localStorage.setItem("DARKMODE", "true");
+      document.body.classList.add('dark');
+      localStorage.setItem('DARKMODE', 'true');
     } else {
-      document.body.classList.remove("dark");
-      localStorage.removeItem("DARKMODE");
+      document.body.classList.remove('dark');
+      localStorage.removeItem('DARKMODE');
     }
   }, [enabled]);
 
